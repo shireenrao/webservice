@@ -37,7 +37,8 @@ async def issue_comment_created_event(event, gh, *args, **kwargs):
     """ Whenever a issue comment is created react to the user """
     # url = event.data["issue"]["comment"]["url"] + "/reactions"
     # url = event.data["comment"]["url"] + "/reactions"
-    url = event.data["comment"]["html_url"] + "/reactions"
+    # url = event.data["comment"]["html_url"] + "/reactions"
+    url = event.data["comment"]["html_url"] + "/reaction"
     print(f"URL:=====>{url}")
     accept = "application/vnd.github.squirrel-girl-preview"
     message = {
