@@ -35,7 +35,8 @@ async def pull_request_closed_event(event, gh, *args, **kwargs):
 @router.register("issue_comment", action="created")
 async def issue_comment_created_event(event, gh, *args, **kwargs):
     """ Whenever a issue comment is created react to the user """
-    url = event.data["issue"]["url"] + "/reactions"
+    # url = event.data["issue"]["comment"]["url"] + "/reactions"
+    url = event.data["comment"]["url"] + "/reactions"
     accept = "application/vnd.github.squirrel-girl-preview"
     message = {
         "content": "heart"
