@@ -32,6 +32,18 @@ async def pull_request_closed_event(event, gh, *args, **kwargs):
     await gh.post(url, data={"body": message})
 
 
+@router.register("issue_comment", action="created")
+async def issue_comment_created_event(event, gh, *args, **kwargs):
+    """ Whenever a issue comment is created react to the user """
+    url = event.data["issue"]["url"] + "/reactions"
+    accept = "application/vnd.github.squirrel-girl-preview"
+    message = {
+        "content": "heart"
+    }
+    await gh.post(url, data=message, accept=accept)
+
+
+
 @routes.post("/")
 async def main(request):
     # read the GitHub webhook payload
