@@ -22,6 +22,16 @@ async def issue_opened_event(event, gh, *args, **kwargs):
     await gh.post(url, data={"body": message})
 
 
+@router.register("pull_request", action="closed")
+async def pull_request_closed_event(event, gh, *args, **kwargs):
+    """ Whenever a pull request is closed, say thank you for the pull request """
+    url = event.data["pull_request"]["comments_url"]
+    author = event.data["pull_request"]["user"]["login"]
+
+    message = f"Thanks for the contribution @{author}! 🥂"
+    await gh.post(url, data={"body": message})
+
+
 @routes.post("/")
 async def main(request):
     # read the GitHub webhook payload
