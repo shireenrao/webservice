@@ -52,7 +52,7 @@ async def issue_comment_created_event(event, gh, *args, **kwargs):
     # url = event.data["issue"]["comment"]["url"] + "/reactions"
     # url = event.data["comment"]["url"] + "/reactions"
     # url = event.data["comment"]["html_url"] + "/reactions"
-    url = event.data["comment"]["html_url"] + "/reaction"
+    url = event.data["comment"]["url"] + "/reactions"
     print(f"URL:=====>{url}")
     accept = "application/vnd.github.squirrel-girl-preview"
     message = {
