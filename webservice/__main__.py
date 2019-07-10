@@ -35,7 +35,7 @@ async def pull_request_closed_event(event, gh, *args, **kwargs):
 @router.register("pull_request", action="opened")
 async def pull_request_opened_event(event, gh, *args, **kwargs):
     """ Whenever a pull request is closed, say thank you for the pull request """
-    url = event.data["pull_request"]["url"]
+    url = event.data["pull_request"]["issue_url"]
     accept = "application/vnd.github.symmetra-preview+json"
 
     message = {
@@ -43,7 +43,7 @@ async def pull_request_opened_event(event, gh, *args, **kwargs):
             "pending review"
         ]
     }
-    await gh.patch(url, data=message)
+    await gh.patch(url, data=message, accept=accept)
 
 
 @router.register("issue_comment", action="created")
