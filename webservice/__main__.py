@@ -53,12 +53,14 @@ async def issue_comment_created_event(event, gh, *args, **kwargs):
     # url = event.data["comment"]["url"] + "/reactions"
     # url = event.data["comment"]["html_url"] + "/reactions"
     url = event.data["comment"]["url"] + "/reactions"
-    print(f"URL:=====>{url}")
+    author = event.data["comment"]["user"]["login"]
+    # print(f"URL:=====>{url}")
     accept = "application/vnd.github.squirrel-girl-preview"
     message = {
         "content": "heart"
     }
-    await gh.post(url, data=message, accept=accept)
+    if author != "shireenrao":
+        await gh.post(url, data=message, accept=accept)
 
 
 
